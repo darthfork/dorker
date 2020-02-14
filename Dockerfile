@@ -2,8 +2,7 @@ FROM fedora
 
 ARG TERRAFORM_VERSION
 
-RUN dnf -y update
-RUN dnf -y install wget make gcc awscli unzip
+RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip
 
 # Install binaries not available in dnf
 RUN set -ex \
