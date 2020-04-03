@@ -9,5 +9,5 @@ docker run -it\
   -v $HOME/workspace:/workspace\
   -v $HOME/.aws:/root/.aws\
   -h arai_fedora_docker\
-  abhi56rai/fedora_dev:latest
+  abhi56rai/dorker:latest
 ```

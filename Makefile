@@ -1,7 +1,7 @@
 .PHONY: clean upload
 
 DIR			:= ${CURDIR}
-IMAGE			:= fedora_dev
+IMAGE			:= dorker
 ACCOUNT			:= abhi56rai
 TAG			:= latest
 REPO 			:= $(ACCOUNT)/$(IMAGE):$(TAG)
