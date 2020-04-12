@@ -2,7 +2,14 @@ FROM fedora
 
 ARG TERRAFORM_VERSION=0.12.18
 
-RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip
+RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip dnf-plugins-core
+
+# Install Docker CLI for drone builds
+RUN dnf config-manager --add-repo \
+        https://download.docker.com/linux/fedora/docker-ce.repo
+
+RUN dnf -y install docker-ce-cli
+
 
 # Install binaries not available in dnf
 RUN set -ex \
