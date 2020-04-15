@@ -1,6 +1,6 @@
 FROM fedora
 
-ARG TERRAFORM_VERSION=0.12.18
+ARG TERRAFORM_VERSION=0.12.24
 
 RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip dnf-plugins-core
 
