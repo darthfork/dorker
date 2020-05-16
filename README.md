@@ -9,6 +9,8 @@ docker run -it\
   -v $HOME/workspace:/workspace\
   -v $HOME/.aws:/root/.aws\
   -v /var/run/docker.sock:/var/run/docker.sock\
-  -h fedora_docker\
+  --user $(id -u):$(id -g)\
+  -e USER=$USER\
+  -h dorker\
   abhi56rai/dorker:latest
 ```
