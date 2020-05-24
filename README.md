@@ -1,6 +1,11 @@
 # Dorker
 Fedora Docker with all my commonly used dev tools installed
 
+### Build Status
+
+![Docker Build](https://github.com/darthfork/dorker/workflows/Docker%20Build/badge.svg)
+
+
 ### Starting the container
 
 ```
