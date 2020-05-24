@@ -1,25 +1,10 @@
-name: Docker
-
-on:
-  pull_request:
-    branches:
-      - master
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Build Image
-        run: make build
+name: Docker Push
 
 on:
   push:
     branches:
       - master
-
+jobs:
   push:
     runs-on: ubuntu-latest
 
