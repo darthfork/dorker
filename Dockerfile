@@ -1,4 +1,5 @@
 FROM fedora
+MAINTAINER Abhishek Rai <rai.abhishek90@gmail.com>
 
 ARG TERRAFORM_VERSION=0.12.24
 
