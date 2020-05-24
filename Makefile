@@ -14,5 +14,5 @@ build:
 tag:
 	docker tag $(IMAGE):$(TAG) $(REPO)
 
-push:
+push: tag
 	docker push $(REPO)
