@@ -1,4 +1,4 @@
-.PHONY: clean upload
+.PHONY: build push
 
 DIR			:= ${CURDIR}
 IMAGE			:= dorker
