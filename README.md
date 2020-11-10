@@ -1,9 +1,8 @@
 # Dorker
 Fedora Docker with all my commonly used dev tools installed
 
-### Build Status
-
-![Docker Build](https://github.com/darthfork/dorker/workflows/Docker%20Build/badge.svg)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/darthfork/dorker/Docker%20Push?style=for-the-badge&logo=github)](https://github.com/darthfork/dorker/actions?query=workflow%3A%22Docker+Push%22)
+[![Docker Image Size (tag)](https://img.shields.io/docker/image-size/darthfork/dorker/latest?logo=docker&style=for-the-badge)](https://hub.docker.com/r/darthfork/dorker/)
 
 
 ### Starting the container
@@ -15,5 +14,5 @@ docker run -it\
   -v $HOME/.aws:/root/.aws\
   -v /var/run/docker.sock:/var/run/docker.sock\
   -h dorker\
-  abhi56rai/dorker:latest
+  darthfork/dorker:latest
 ```
