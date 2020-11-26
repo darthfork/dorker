@@ -5,7 +5,7 @@ Fedora Docker with all my commonly used dev tools installed
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/darthfork/dorker/latest?logo=docker&style=for-the-badge)](https://hub.docker.com/r/darthfork/dorker/)
 
 
-### Starting the container
+### Starting a shell in the container
 
 ```
 docker run -it\
@@ -14,5 +14,5 @@ docker run -it\
   -v $HOME/.aws:/root/.aws\
   -v /var/run/docker.sock:/var/run/docker.sock\
   -h dorker\
-  darthfork/dorker:latest
+  darthfork/dorker:latest /bin/bash
 ```

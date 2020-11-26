@@ -1,7 +1,7 @@
 FROM fedora:31
 MAINTAINER Abhishek Rai <rai.abhishek90@gmail.com>
 
-ARG TERRAFORM_VERSION=0.12.24
+ARG TERRAFORM_VERSION=0.13.5
 
 RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip dnf-plugins-core
 
