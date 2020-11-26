@@ -20,5 +20,4 @@ RUN set -ex \
     && rm -f /terraform.zip \
     && chmod 755 terraform
 
-ENTRYPOINT ["/bin/bash"]
 WORKDIR /workspace
