@@ -12,6 +12,7 @@ docker run -it\
   -v $HOME/.ssh:/root/.ssh\
   -v $HOME/workspace:/workspace\
   -v $HOME/.aws:/root/.aws\
+  -v $HOME/.kube:/root/.kube\
   -v /var/run/docker.sock:/var/run/docker.sock\
   -h dorker\
   darthfork/dorker:latest /bin/bash
