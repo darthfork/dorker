@@ -1,8 +1,12 @@
-FROM fedora:31
+FROM fedora:32
 MAINTAINER Abhishek Rai <rai.abhishek90@gmail.com>
+
+WORKDIR /workspace
 
 ARG TERRAFORM_VERSION=0.14.3
 ARG KUBECTL_VERSION=v1.20.0
+
+ADD requirements.txt /workspace
 
 RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip dnf-plugins-core
 
@@ -12,6 +16,7 @@ RUN dnf config-manager --add-repo \
 
 RUN dnf -y install docker-ce-cli
 
+RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
 
 # Install binaries not available in dnf
 RUN set -ex \
@@ -25,5 +30,3 @@ RUN set -ex \
     && unzip /terraform.zip \
     && rm -f /terraform.zip \
     && chmod 755 terraform
-
-WORKDIR /workspace
