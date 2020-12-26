@@ -33,7 +33,7 @@ RUN set -ex \
     && chmod 755 terraform
 
 RUN groupadd -r ${USERNAME} &&\
-    useradd -r -g ${USERNAME} -u 1000 -m -d /home/${USERNAME}/ ${USERNAME}
+    useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
 
-WORKDIR /home/${USERNAME}/workspace/
+WORKDIR /${USERNAME}/workspace/
 USER 1000
