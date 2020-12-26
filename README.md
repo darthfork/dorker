@@ -13,9 +13,11 @@ docker run -it\
     -v "$HOME"/workspace:/darthfork/workspace\
     -v "$HOME"/.aws:/darthfork/.aws\
     -v "$HOME"/.kube:/darthfork/.kube\
-    -v "$HOME"/.vim:/darthfork/.vim\
+    -v "$HOME"/.helm:/darthfork/.helm\
     -v "$SSH_AUTH_SOCK":/tmp/ssh_auth_sock\
+    -v "$HOME"/.vim:/darthfork/.vim\
     -v /var/run/docker.sock:/var/run/docker.sock\
+    --group-add "$(getent group docker | awk -F: '{print $3}')"\
     -h dorker\
-    darthfork/dorker:latest /bin/bash
+    docker.io/darthfork/dorker:latest /bin/bash
 ```
