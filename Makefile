@@ -9,7 +9,7 @@ REPO 			:= $(ACCOUNT)/$(IMAGE):$(TAG)
 all: build
 
 build:
-	docker build -t $(IMAGE) .
+	docker build -t $(IMAGE):$(TAG) .
 
 tag:
 	docker tag $(IMAGE):$(TAG) $(REPO)

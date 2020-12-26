@@ -9,11 +9,13 @@ Fedora Docker with all my commonly used dev tools installed
 
 ```
 docker run -it\
-  -v $HOME/.ssh:/root/.ssh\
-  -v $HOME/workspace:/workspace\
-  -v $HOME/.aws:/root/.aws\
-  -v $HOME/.kube:/root/.kube\
-  -v /var/run/docker.sock:/var/run/docker.sock\
-  -h dorker\
-  darthfork/dorker:latest /bin/bash
+    -v "$HOME"/.ssh:/home/darthfork/.ssh\
+    -v "$HOME"/workspace:/home/darthfork/workspace\
+    -v "$HOME"/.aws:/home/darthfork/.aws\
+    -v "$HOME"/.kube:/home/darthfork/.kube\
+    -v "$HOME"/.vim:/home/darthfork/.vim\
+    -v "$SSH_AUTH_SOCK":/tmp/ssh_auth_sock\
+    -v /var/run/docker.sock:/var/run/docker.sock\
+    -h dorker\
+    darthfork/dorker:latest /bin/bash
 ```

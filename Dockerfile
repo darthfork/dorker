@@ -1,22 +1,23 @@
 FROM fedora:32
 MAINTAINER Abhishek Rai <rai.abhishek90@gmail.com>
 
-WORKDIR /workspace
+ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
+ARG USERNAME=darthfork
 ARG TERRAFORM_VERSION=0.14.3
 ARG KUBECTL_VERSION=v1.20.0
 
-ADD requirements.txt /workspace
+ADD requirements.txt /
 
-RUN dnf -y update && dnf -y install wget make gcc awscli unzip python3 python3-pip dnf-plugins-core
+RUN dnf -y update && dnf -y install dnf-plugins-core
 
-# Install Docker CLI for drone builds
+# To user docker-cli run container as root
 RUN dnf config-manager --add-repo \
         https://download.docker.com/linux/fedora/docker-ce.repo
 
-RUN dnf -y install docker-ce-cli
+RUN dnf -y install wget make gcc awscli unzip python3 python3-pip docker-ce-cli openssh-clients vim git
 
-RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Install binaries not available in dnf
 RUN set -ex \
@@ -30,3 +31,9 @@ RUN set -ex \
     && unzip /terraform.zip \
     && rm -f /terraform.zip \
     && chmod 755 terraform
+
+RUN groupadd -r ${USERNAME} &&\
+    useradd -r -g ${USERNAME} -u 1000 -m -d /home/${USERNAME}/ ${USERNAME}
+
+WORKDIR /home/${USERNAME}/workspace/
+USER 1000
