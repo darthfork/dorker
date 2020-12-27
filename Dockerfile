@@ -38,7 +38,7 @@ RUN set -ex \
 # helm 2
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
 
-RUN groupadd -r ${USERNAME} &&\
+RUN groupadd -g 1000 -r ${USERNAME} &&\
     useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
 
 WORKDIR /${USERNAME}/workspace/
