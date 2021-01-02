@@ -15,12 +15,13 @@ RUN dnf -y update && dnf -y install dnf-plugins-core
 RUN dnf config-manager --add-repo \
         https://download.docker.com/linux/fedora/docker-ce.repo
 
-RUN dnf -y install wget make gcc awscli unzip python3 python3-pip docker-ce-cli openssh-clients vim git
+RUN dnf -y install wget make gcc awscli unzip python3 python3-pip\
+                   docker-ce-cli openssh-clients vim git clang-analyzer\
+                   kernel-devel
 
 RUN pip install --upgrade pip && pip install -r /requirements.txt
 
 # Install binaries not available in dnf or pip
-
 # kubectl
 RUN set -ex \
     && cd /usr/local/bin \
