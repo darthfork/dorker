@@ -17,7 +17,7 @@ RUN dnf config-manager --add-repo \
 
 RUN dnf -y install wget make gcc awscli unzip python3 python3-pip\
                    docker-ce-cli openssh-clients vim git clang-analyzer\
-                   kernel-devel
+                   kernel-devel valgrind rust cargo golang
 
 RUN pip install --upgrade pip && pip install -r /requirements.txt
 
