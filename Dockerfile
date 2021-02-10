@@ -15,7 +15,7 @@ RUN dnf -y update && dnf -y install dnf-plugins-core
 RUN dnf config-manager --add-repo \
         https://download.docker.com/linux/fedora/docker-ce.repo
 
-RUN dnf -y install wget make gcc awscli unzip python3 python3-pip\
+RUN dnf -y install wget make gcc unzip python3 python3-pip\
                    docker-ce-cli openssh-clients vim git clang-analyzer\
                    kernel-devel valgrind rust cargo golang
 
