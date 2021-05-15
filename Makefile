@@ -16,3 +16,6 @@ tag:
 
 push: tag
 	docker push $(REPO)
+
+lint:
+	hadolint Dockerfile
