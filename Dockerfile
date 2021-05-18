@@ -1,4 +1,4 @@
-FROM fedora:32
+FROM fedora:34
 
 ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
@@ -16,7 +16,7 @@ RUN dnf config-manager --add-repo \
 
 RUN dnf -y install wget make gcc unzip python3 python3-pip\
                    docker-ce-cli openssh-clients vim git clang-analyzer\
-                   kernel-devel valgrind rust cargo golang\
+                   kernel-devel valgrind rust cargo golang openssl\
                    && dnf -y clean all
 
 RUN pip install --no-cache-dir --upgrade pip==21.1.1 && pip install --no-cache-dir -r /requirements.txt
