@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  OS_TAG: fedora34
-
 jobs:
   push:
     runs-on: ubuntu-20.04
@@ -19,7 +16,6 @@ jobs:
       - name: Build image
         run: |
           make build
-          make TAG="${OS_TAG}" build
 
       - name: Log into registry
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -27,4 +23,3 @@ jobs:
       - name: Push image
         run: |
           make push
-          make TAG="${OS_TAG}" push
