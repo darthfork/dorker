@@ -8,7 +8,7 @@ ARG KUBECTL_VERSION=v1.20.0
 
 COPY requirements.txt /
 
-RUN dnf -y update && dnf -y install dnf-plugins-core && dnf -y clean all
+RUN dnf -y update && dnf -y install dnf-plugins-core
 
 # To user docker-cli pass the id of docker group to container as group_add
 RUN dnf config-manager --add-repo \
@@ -31,9 +31,9 @@ RUN set -ex \
 
 # terraform
 RUN set -ex \
-    && curl -s -o /terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-    && unzip /terraform.zip \
-    && rm -f /terraform.zip \
+    && curl -s -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+    && unzip terraform.zip \
+    && rm -f terraform.zip \
     && chmod 755 terraform
 
 # helm
