@@ -3,7 +3,7 @@ FROM fedora:34
 ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
 ARG USERNAME=darthfork
-ARG TERRAFORM_VERSION=0.15.3
+ARG TERRAFORM_VERSION=1.0.4
 ARG KUBECTL_VERSION=v1.20.0
 
 COPY requirements.txt /
