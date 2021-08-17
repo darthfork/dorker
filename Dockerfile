@@ -15,7 +15,7 @@ RUN dnf config-manager --add-repo \
         https://download.docker.com/linux/fedora/docker-ce.repo
 
 RUN dnf -y install wget make gcc unzip python3 python3-pip\
-                   docker-ce-cli openssh-clients vim git clang-analyzer\
+                   docker-ce-cli openssh-clients git clang-analyzer\
                    kernel-devel valgrind rust cargo golang openssl\
                    && dnf -y clean all
 

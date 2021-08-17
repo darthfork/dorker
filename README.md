@@ -15,7 +15,6 @@ docker run -it\
     -v "$HOME"/.kube:/darthfork/.kube\
     -v "$HOME"/.helm:/darthfork/.helm\
     -v "$SSH_AUTH_SOCK":/tmp/ssh_auth_sock\
-    -v "$HOME"/.vim:/darthfork/.vim\
     -v /var/run/docker.sock:/var/run/docker.sock\
     --group-add "$(getent group docker | awk -F: '{print $3}')"\
     -h dorker\
