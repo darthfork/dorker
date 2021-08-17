@@ -5,6 +5,7 @@ ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 ARG USERNAME=darthfork
 ARG TERRAFORM_VERSION=1.0.4
 ARG KUBECTL_VERSION=v1.20.0
+ARG MUSTACHE_VERSION=1.2.2
 
 COPY requirements.txt /
 
@@ -35,6 +36,13 @@ RUN set -ex \
     && unzip terraform.zip \
     && rm -f terraform.zip \
     && chmod 755 terraform
+
+# mustache
+RUN set -ex \
+    && curl -sL -o mustache.tar.gz https://github.com/cbroglie/mustache/releases/download/v${MUSTACHE_VERSION}/mustache_${MUSTACHE_VERSION}_linux_amd64.tar.gz\
+    && tar xzf mustache.tar.gz\
+    && rm -f mustache.tar.gz\
+    && chmod 755 mustache
 
 # helm
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
