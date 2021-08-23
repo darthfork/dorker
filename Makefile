@@ -11,7 +11,7 @@ REPO_OS 	:= $(ACCOUNT)/$(IMAGE):$(TAG_OS)
 all: build
 
 build:
-	docker build -t $(IMAGE):$(TAG) .
+	docker build --build-arg TARGETPLATFORM=linux/amd64 -t $(IMAGE):$(TAG) .
 
 tag:
 	docker tag $(IMAGE):$(TAG) $(REPO)

@@ -2,6 +2,7 @@ FROM fedora:34
 
 ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
+ARG TARGETPLATFORM
 ARG USERNAME=darthfork
 ARG TERRAFORM_VERSION=1.0.4
 ARG KUBECTL_VERSION=v1.20.0
@@ -26,20 +27,20 @@ RUN pip install --no-cache-dir --upgrade pip==21.1.1 && pip install --no-cache-d
 
 WORKDIR /usr/local/bin
 # kubectl
-RUN set -ex \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
+RUN set -ex && ARCH=$(awk -F/ '{print $2}' <<< ${TARGETPLATFORM})\
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/$ARCH/kubectl \
     && chmod 755 kubectl
 
 # terraform
-RUN set -ex \
-    && curl -s -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+RUN set -ex && ARCH=$(awk -F/ '{print $2}' <<< ${TARGETPLATFORM})\
+    && curl -s -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$ARCH.zip \
     && unzip terraform.zip \
     && rm -f terraform.zip \
     && chmod 755 terraform
 
 # mustache
-RUN set -ex \
-    && curl -sL -o mustache.tar.gz https://github.com/cbroglie/mustache/releases/download/v${MUSTACHE_VERSION}/mustache_${MUSTACHE_VERSION}_linux_amd64.tar.gz\
+RUN set -ex && ARCH=$(awk -F/ '{print $2}' <<< ${TARGETPLATFORM})\
+    && curl -sL -o mustache.tar.gz https://github.com/cbroglie/mustache/releases/download/v${MUSTACHE_VERSION}/mustache_${MUSTACHE_VERSION}_linux_$ARCH.tar.gz\
     && tar xzf mustache.tar.gz\
     && rm -f mustache.tar.gz\
     && chmod 755 mustache
