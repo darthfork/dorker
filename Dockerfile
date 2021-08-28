@@ -6,6 +6,7 @@ ARG USERNAME=darthfork
 ARG TERRAFORM_VERSION=1.0.4
 ARG KUBECTL_VERSION=v1.20.0
 ARG MUSTACHE_VERSION=1.2.2
+ARG DOCTL_VERSION=1.64.0
 
 COPY requirements.txt /
 
@@ -44,6 +45,13 @@ RUN set -ex \
     && rm -f mustache.tar.gz\
     && chmod 755 mustache
 
+# DOCTL
+RUN set -ex \
+    && curl -sL -o doctl.tar.gz https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz\
+    && tar xf doctl.tar.gz\
+    && rm -f doctl.tar.gz\
+    && chmod 755 doctl
+
 # helm
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
@@ -51,4 +59,5 @@ RUN groupadd -g 1000 -r ${USERNAME} &&\
     useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
 
 WORKDIR /${USERNAME}/workspace/
+
 USER 1000
