@@ -1,10 +1,10 @@
 .PHONY: build push
 
+include version
+
 DIR		:= ${CURDIR}
 IMAGE		:= dorker
 ACCOUNT		:= darthfork
-TAG		:= latest
-TAG_OS		:= fedora34
 REPO 		:= $(ACCOUNT)/$(IMAGE):$(TAG)
 REPO_OS 	:= $(ACCOUNT)/$(IMAGE):$(TAG_OS)
 
