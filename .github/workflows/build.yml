@@ -51,7 +51,7 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ${{ steps.prep.outputs.base_tag }}
+          tags: ${{ steps.prep.outputs.tags }}
 
       - name: Build (no push)
         if: github.event_name == 'pull_request'
@@ -62,4 +62,4 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64
           push: false
-          tags: ${{ steps.prep.outputs.base_tag }}
+          tags: ${{ steps.prep.outputs.tags }}
