@@ -7,17 +7,14 @@ IMAGE		:= dorker
 ACCOUNT		:= darthfork
 REPO 		:= $(ACCOUNT)/$(IMAGE):$(TAG)
 REPO_OS 	:= $(ACCOUNT)/$(IMAGE):$(TAG_OS)
+TARGETPLATFORM	:= linux/amd64
 
 all: build
 
 build:
-	docker build -t $(IMAGE):$(TAG) .
+	docker buildx build --platform $(TARGETPLATFORM) -t $(REPO) -t $(REPO_OS) --load .
 
-tag:
-	docker tag $(IMAGE):$(TAG) $(REPO)
-	docker tag $(IMAGE):$(TAG) $(REPO_OS)
-
-push: tag
+push: build
 	docker push $(REPO)
 	docker push $(REPO_OS)
 
