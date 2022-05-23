@@ -1,4 +1,4 @@
-FROM fedora:35
+FROM fedora:36
 
 ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
