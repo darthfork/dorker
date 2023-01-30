@@ -1,0 +1,16 @@
+wget-1.21.3
+make-4.3
+gcc-12.2.1
+unzip-6.0
+python3-3.10.9
+python3-pip-21.3.1
+docker-ce-cli-20.10.23
+openssh-clients-8.8p1
+git-2.39.1
+clang-analyzer-14.0.5
+kernel-devel-6.1.8
+valgrind-3.19.0
+rust-1.66.1
+cargo-1.66.1
+golang-1.18.10
+openssl-3.0.5

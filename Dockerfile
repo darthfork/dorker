@@ -8,20 +8,19 @@ ARG TERRAFORM_VERSION=1.3.5
 ARG KUBECTL_VERSION=v1.20.0
 ARG DOCTL_VERSION=1.64.0
 
-COPY requirements.txt /
+COPY requirements.txt /tmp/requirements.txt
+COPY dnf-packages.list /tmp/dnf-packages.list
 
-RUN dnf -y update && dnf -y install dnf-plugins-core
+
+RUN dnf -y update && dnf -y install dnf-plugins-core && dnf clean all
 
 # To user docker-cli pass the id of docker group to container as group_add
 RUN dnf config-manager --add-repo \
         https://download.docker.com/linux/fedora/docker-ce.repo
 
-RUN dnf -y install wget make gcc unzip python3 python3-pip\
-                   docker-ce-cli openssh-clients git clang-analyzer\
-                   kernel-devel valgrind rust cargo golang openssl\
-                   && dnf -y clean all
+RUN dnf -y install $(cat /tmp/dnf-packages.list) && dnf -y clean all
 
-RUN pip install --no-cache-dir --upgrade pip==22.0.4 && pip install --no-cache-dir -r /requirements.txt
+RUN pip install --no-cache-dir --upgrade pip==22.0.4 && pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install binaries not available in dnf or pip
 
