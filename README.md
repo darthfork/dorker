@@ -1,7 +1,7 @@
 # Dorker
 Fedora Docker with all my commonly used dev tools installed
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/darthfork/dorker/Docker%20Push?style=for-the-badge&logo=github)](https://github.com/darthfork/dorker/actions?query=workflow%3A%22Docker+Push%22)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/darthfork/dorker/build.yml?style=for-the-badge&logo=github)](https://github.com/darthfork/dorker/actions?query=workflow%3A%22Docker+Push%22)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/darthfork/dorker/latest?logo=docker&style=for-the-badge)](https://hub.docker.com/r/darthfork/dorker/)
 
 
