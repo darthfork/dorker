@@ -4,9 +4,9 @@ ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
 ARG TARGETARCH
 ARG USERNAME=darthfork
-ARG TERRAFORM_VERSION=1.3.5
-ARG KUBECTL_VERSION=v1.20.0
-ARG DOCTL_VERSION=1.64.0
+ARG TERRAFORM_VERSION=1.3.7
+ARG KUBECTL_VERSION=1.25.0
+ARG DOCTL_VERSION=1.92.1
 
 COPY requirements.txt /tmp/requirements.txt
 COPY dnf-packages.list /tmp/dnf-packages.list
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir --upgrade pip==22.0.4 && pip install --no-cache-d
 WORKDIR /usr/local/bin
 # kubectl
 RUN set -ex \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl \
     && chmod 755 kubectl
 
 # terraform
