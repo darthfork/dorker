@@ -8,9 +8,9 @@ docker-ce-cli-20.10.23
 openssh-clients-8.8p1
 git-2.39.1
 clang-analyzer-14.0.5
-kernel-devel-6.1.8
+kernel-devel-6.1.9
 valgrind-3.19.0
-rust-1.66.1
-cargo-1.66.1
+rust-1.67.0
+cargo-1.67.0
 golang-1.18.10
 openssl-3.0.5
