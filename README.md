@@ -17,7 +17,7 @@ docker run -it\
     -v "$SSH_AUTH_SOCK":/tmp/ssh_auth_sock\
     -e DO_TOKEN\
     -v /var/run/docker.sock:/var/run/docker.sock\
-    --group-add "$(getent group docker | awk -F: '{print $3}')"\
+    --group-add "$DOCKER_GROUP_ID"\
     -h dorker\
     docker.io/darthfork/dorker:latest /bin/bash
 ```
