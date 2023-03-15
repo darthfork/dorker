@@ -31,7 +31,7 @@ RUN set -ex \
     && curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
     && unzip -d awscli awscli.zip \
     && ./awscli/aws/install \
-    && rm -f awscli.zip awscli
+    && rm -rf awscli.zip awscli
 
 # kubectl
 RUN set -ex \
