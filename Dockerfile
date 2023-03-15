@@ -25,6 +25,14 @@ RUN pip install --no-cache-dir --upgrade pip==22.0.4 && pip install --no-cache-d
 # Install binaries not available in dnf or pip
 
 WORKDIR /usr/local/bin
+
+# aws cli
+RUN set -ex \
+    && curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
+    && unzip -d awscli awscli.zip \
+    && ./awscli/aws/install \
+    && rm -rf awscli.zip awscli
+
 # kubectl
 RUN set -ex \
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl \
