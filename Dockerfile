@@ -1,12 +1,12 @@
-FROM fedora:36
+FROM fedora:38
 
 ENV SSH_AUTH_SOCK=/tmp/ssh_auth_sock
 
 ARG TARGETARCH
 ARG USERNAME=darthfork
-ARG TERRAFORM_VERSION=1.3.7
-ARG KUBECTL_VERSION=1.25.0
-ARG DOCTL_VERSION=1.92.1
+ARG TERRAFORM_VERSION=1.4.6
+ARG KUBECTL_VERSION=1.27.1
+ARG DOCTL_VERSION=1.94.0
 
 COPY requirements.txt /tmp/requirements.txt
 COPY dnf-packages.list /tmp/dnf-packages.list
@@ -20,7 +20,7 @@ RUN dnf config-manager --add-repo \
 
 RUN dnf -y install $(cat /tmp/dnf-packages.list) && dnf -y clean all
 
-RUN pip install --no-cache-dir --upgrade pip==22.0.4 && pip install --no-cache-dir -r /tmp/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip==22.3.1 && pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Install binaries not available in dnf or pip
 
