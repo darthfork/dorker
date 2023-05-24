@@ -7,7 +7,7 @@ IMAGE		:= dorker
 ACCOUNT		:= darthfork
 REPO 		:= $(ACCOUNT)/$(IMAGE):$(TAG)
 REPO_OS 	:= $(ACCOUNT)/$(IMAGE):$(TAG_OS)
-TARGETPLATFORM	:= linux/amd64
+TARGETPLATFORM	:= linux/arm64
 
 all: build
 
