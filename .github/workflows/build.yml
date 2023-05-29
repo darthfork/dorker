@@ -86,7 +86,7 @@ jobs:
       ostag: ${{ steps.prep.outputs.ostag }}
 
   merge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - build
     if: ${{ github.event_name == 'push' }}
