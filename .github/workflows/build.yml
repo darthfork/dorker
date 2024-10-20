@@ -4,15 +4,23 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Dockerfile'
+      - 'dnf-packages.list'
+      - '.github/workflows/build.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'Dockerfile'
+      - 'dnf-packages.list'
+      - '.github/workflows/build.yml'
 env:
   REGISTRY_IMAGE: darthfork/dorker
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -21,7 +29,7 @@ jobs:
           - linux/amd64
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Prepare
         id: prep
@@ -32,7 +40,7 @@ jobs:
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY_IMAGE }}
           tags: |
@@ -40,22 +48,22 @@ jobs:
             type=raw,value=${{ steps.prep.outputs.ostag }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: all
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Log into registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         id: build
         with:
           builder: ${{ steps.buildx.outputs.name }}
@@ -74,7 +82,7 @@ jobs:
           touch "/tmp/digests/${digest#sha256:}"
 
       - name: Upload digest
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: digests
           path: /tmp/digests/*
@@ -86,23 +94,23 @@ jobs:
       ostag: ${{ steps.prep.outputs.ostag }}
 
   merge:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     if: ${{ github.event_name == 'push' }}
     steps:
       - name: Download digests
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4
         with:
           name: digests
           path: /tmp/digests
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY_IMAGE }}
           tags: |
@@ -110,7 +118,7 @@ jobs:
             type=raw,value=${{ needs.build.outputs.ostag }}
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
