@@ -13,7 +13,6 @@ docker run -it\
     -v "$HOME"/workspace:/darthfork/workspace\
     -v "$HOME"/.aws:/darthfork/.aws\
     -v "$HOME"/.kube:/darthfork/.kube\
-    -v "$HOME"/.helm:/darthfork/.helm\
     -e DO_TOKEN\
     -h dorker\
     docker.io/darthfork/dorker:latest /bin/bash

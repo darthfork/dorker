@@ -4,9 +4,17 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'Dockerfile'
+      - 'dnf-packages.list'
+      - '.github/workflows/build.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - 'Dockerfile'
+      - 'dnf-packages.list'
+      - '.github/workflows/build.yml'
 env:
   REGISTRY_IMAGE: darthfork/dorker
 
