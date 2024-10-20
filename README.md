@@ -9,11 +9,11 @@ Fedora Docker with all my commonly used dev tools installed
 
 ```
 docker run -it\
-    -v "$HOME"/.ssh:/darthfork/.ssh\
     -v "$HOME"/workspace:/darthfork/workspace\
     -v "$HOME"/.aws:/darthfork/.aws\
     -v "$HOME"/.kube:/darthfork/.kube\
     -e DO_TOKEN\
+    -e AWS_PROFILE\
     -h dorker\
     docker.io/darthfork/dorker:latest /bin/bash
 ```
