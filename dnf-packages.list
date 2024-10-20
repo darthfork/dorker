@@ -1,10 +1,6 @@
-wget
-make
-gcc
-unzip
-python3
 git
-clang-analyzer
-kernel-devel
-valgrind
+make
 openssl
+python3
+unzip
+wget

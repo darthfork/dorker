@@ -2,9 +2,6 @@ FROM fedora:40
 
 ARG TARGETARCH
 ARG USERNAME=darthfork
-ARG TERRAFORM_VERSION=1.9.8
-ARG KUBECTL_VERSION=1.27.1
-ARG DOCTL_VERSION=1.94.0
 
 COPY dnf-packages.list /tmp/dnf-packages.list
 
@@ -15,18 +12,25 @@ RUN dnf -y update && dnf -y install $(cat /tmp/dnf-packages.list) && dnf -y clea
 WORKDIR /usr/local/bin
 
 # aws cli
+# aws cli
 RUN set -ex \
-    && curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \
+    && if [ "$TARGETARCH" = "arm64" ]; then \
+        curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip; \
+    else \
+        curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip; \
+    fi \
     && unzip -d awscli awscli.zip \
     && ./awscli/aws/install \
     && rm -rf awscli.zip awscli
 
 # kubectl
+ARG KUBECTL_VERSION=1.31.0
 RUN set -ex \
     && curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl \
     && chmod 755 kubectl
 
 # terraform
+ARG TERRAFORM_VERSION=1.9.8
 RUN set -ex \
     && curl -s -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${TARGETARCH}.zip \
     && unzip terraform.zip \
@@ -34,6 +38,7 @@ RUN set -ex \
     && chmod 755 terraform
 
 # DOCTL
+ARG DOCTL_VERSION=1.115.0
 RUN set -ex \
     && curl -sL -o doctl.tar.gz https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-${TARGETARCH}.tar.gz\
     && tar xf doctl.tar.gz\
