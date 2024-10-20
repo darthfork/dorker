@@ -35,8 +35,10 @@ jobs:
         id: prep
         run: |
           source version
-          echo ::set-output name=tag::${TAG}
-          echo ::set-output name=ostag::${TAG_OS}
+          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          echo "ostag=${TAG_OS}" >> $GITHUB_OUTPUT
+          platform=${{ matrix.platform }}
+          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
       - name: Docker meta
         id: meta
