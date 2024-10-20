@@ -3,14 +3,8 @@ make
 gcc
 unzip
 python3
-python3-pip
-docker-ce-cli
-openssh-clients
 git
 clang-analyzer
 kernel-devel
 valgrind
-rust
-cargo
-golang
 openssl
