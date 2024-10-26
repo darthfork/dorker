@@ -52,7 +52,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         with:
-          platforms: all
+          platforms: ${{ matrix.platform }}
 
       - name: Set up Docker Buildx
         id: buildx
