@@ -7,11 +7,10 @@ COPY dnf-packages.list /tmp/dnf-packages.list
 
 RUN dnf -y update && dnf -y install $(cat /tmp/dnf-packages.list) && dnf -y clean all
 
-# Install binaries not available in dnf or pip
+# Install binaries not available in dnf
 
 WORKDIR /usr/local/bin
 
-# aws cli
 # aws cli
 RUN set -ex \
     && if [ "$TARGETARCH" = "arm64" ]; then \
@@ -37,13 +36,9 @@ RUN set -ex \
     && rm -f terraform.zip \
     && chmod 755 terraform
 
-# DOCTL
-ARG DOCTL_VERSION=1.115.0
+# helm
 RUN set -ex \
-    && curl -sL -o doctl.tar.gz https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-${TARGETARCH}.tar.gz\
-    && tar xf doctl.tar.gz\
-    && rm -f doctl.tar.gz\
-    && chmod 755 doctl
+    && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
 RUN groupadd -g 1000 -r ${USERNAME} &&\
     useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
