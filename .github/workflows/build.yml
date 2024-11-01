@@ -22,6 +22,7 @@ env:
 
 jobs:
   build:
+    name: Build Container Image for ${{ matrix.platform }}
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
@@ -97,7 +98,8 @@ jobs:
       tag: ${{ steps.prep.outputs.tag }}
       ostag: ${{ steps.prep.outputs.ostag }}
 
-  merge:
+  release:
+    name: Merge and Push Container Images
     runs-on: ubuntu-24.04
     needs:
       - build
