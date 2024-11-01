@@ -1,6 +1,8 @@
 name: Build
 
 on:
+  schedule:
+    - cron: '0 15 * * 0'
   push:
     branches:
       - main
@@ -99,7 +101,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs:
       - build
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - name: Download digests
         uses: actions/download-artifact@v4
