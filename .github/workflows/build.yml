@@ -1,4 +1,4 @@
-name: Build
+name: Dorker Build and Release
 
 on:
   schedule:
