@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 15 * * 0'
   push:
+    workflow_dispatch:
     branches:
       - main
     paths:
