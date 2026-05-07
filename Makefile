@@ -6,7 +6,7 @@ include version
 
 DIR		:= ${CURDIR}
 IMAGE		:= dorker
-ACCOUNT		:= darthfork
+ACCOUNT		:= ghcr.io/darthfork
 REPO 		:= $(ACCOUNT)/$(IMAGE):$(TAG)
 REPO_OS 	:= $(ACCOUNT)/$(IMAGE):$(TAG_OS)
 TARGETPLATFORM	:= linux/amd64,linux/arm64
