@@ -1,5 +1,8 @@
-awk
+ca-certificates
+curl
+gawk
 git
+gnupg
 make
 openssl
 python3

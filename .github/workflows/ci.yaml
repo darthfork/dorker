@@ -9,14 +9,14 @@ on:
       - main
     paths:
       - 'Dockerfile'
-      - 'dnf-packages.list'
+      - 'apt-packages.list'
       - '.github/workflows/ci.yaml'
   pull_request:
     branches:
       - main
     paths:
       - 'Dockerfile'
-      - 'dnf-packages.list'
+      - 'apt-packages.list'
       - '.github/workflows/ci.yaml'
 
 permissions:

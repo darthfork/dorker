@@ -1,5 +1,5 @@
 # Dorker
-Fedora Docker with all my commonly used dev tools installed
+Ubuntu Docker with all my commonly used dev tools installed
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/darthfork/dorker/ci.yaml?style=for-the-badge&logo=github)](https://github.com/darthfork/dorker/actions/workflows/ci.yaml)
 
