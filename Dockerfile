@@ -45,8 +45,17 @@ RUN set -ex \
 RUN set -ex \
     && curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-RUN groupadd -g 1000 -r ${USERNAME} \
-    && useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
+RUN set -eux; \
+    if getent group 1000 >/dev/null; then \
+        groupmod -n ${USERNAME} "$(getent group 1000 | cut -d: -f1)"; \
+    else \
+        groupadd -g 1000 ${USERNAME}; \
+    fi; \
+    if getent passwd 1000 >/dev/null; then \
+        usermod -l ${USERNAME} -d /${USERNAME}/ -m "$(getent passwd 1000 | cut -d: -f1)"; \
+    else \
+        useradd -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}; \
+    fi
 
 WORKDIR /${USERNAME}/workspace/
 
