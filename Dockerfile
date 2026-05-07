@@ -1,5 +1,7 @@
 FROM fedora:42
 
+LABEL org.opencontainers.image.source="https://github.com/darthfork/dorker"
+
 ARG TARGETARCH
 ARG USERNAME=darthfork
 
