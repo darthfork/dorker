@@ -1,49 +1,52 @@
-FROM fedora:42
+FROM ubuntu:24.04
 
 LABEL org.opencontainers.image.source="https://github.com/darthfork/dorker"
 
+ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETARCH
 ARG USERNAME=darthfork
 
-COPY dnf-packages.list /tmp/dnf-packages.list
+COPY apt-packages.list /tmp/apt-packages.list
 
-RUN dnf -y update && dnf -y install $(cat /tmp/dnf-packages.list) && dnf -y clean all
+RUN apt-get update \
+    && xargs -a /tmp/apt-packages.list apt-get install -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* /tmp/apt-packages.list
 
-# Install binaries not available in dnf
+# Install binaries not available in apt, or where apt lags too far behind.
 
 WORKDIR /usr/local/bin
 
 # aws cli
 RUN set -ex \
     && if [ "$TARGETARCH" = "arm64" ]; then \
-        curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip; \
+        curl -sSLo awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip; \
     else \
-        curl -s -o awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip; \
+        curl -sSLo awscli.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip; \
     fi \
-    && unzip -d awscli awscli.zip \
+    && unzip -q -d awscli awscli.zip \
     && ./awscli/aws/install \
     && rm -rf awscli.zip awscli
 
 # kubectl
 ARG KUBECTL_VERSION=1.31.0
 RUN set -ex \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl \
+    && curl -fsSLO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl \
     && chmod 755 kubectl
 
 # terraform
 ARG TERRAFORM_VERSION=1.9.8
 RUN set -ex \
-    && curl -s -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${TARGETARCH}.zip \
-    && unzip terraform.zip \
+    && curl -fsSLo terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${TARGETARCH}.zip \
+    && unzip -q terraform.zip \
     && rm -f terraform.zip \
     && chmod 755 terraform
 
 # helm
 RUN set -ex \
-    && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    && curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-RUN groupadd -g 1000 -r ${USERNAME} &&\
-    useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
+RUN groupadd -g 1000 -r ${USERNAME} \
+    && useradd -r -g ${USERNAME} -u 1000 -m -d /${USERNAME}/ ${USERNAME}
 
 WORKDIR /${USERNAME}/workspace/
 
